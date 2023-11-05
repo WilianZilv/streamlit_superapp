@@ -123,7 +123,7 @@ from common.tags import Tag
 from streamlit_superapp import State
 
 NAME = "Counter"
-TAG = Tag.DEMO
+TAG = "{A:}📚 Studies" # This page will appear in a group "📚 Studies" at the top of a index page
 ICON = "🔢"
 
 def main(page):
