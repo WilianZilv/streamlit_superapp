@@ -29,7 +29,7 @@ pages/
 ```
 
 - **You can go beyond that, create as many levels as you want!**
-  **Just don't forget to create a "index/**init**.py" along side your pages to have a cool page indexer!**
+  **Just don't forget to create a "index/\_\_init\_\_.py" along side your pages to have a cool page indexer!**
 
 For instance, `pages/hello/__init__.py` can be:
 
