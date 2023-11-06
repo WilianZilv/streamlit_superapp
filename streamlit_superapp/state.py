@@ -85,7 +85,7 @@ class State(Generic[T]):
     @initial_value.setter
     def initial_value(self, value: T):
         Store.set(self.name, value)
-        self.key = Store.set(self.key_name, self.key)
+        self.key = Store.set(self.key_name, str(uuid4()))
 
     @property
     def value(self) -> T:
