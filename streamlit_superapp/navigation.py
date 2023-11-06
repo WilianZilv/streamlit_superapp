@@ -99,9 +99,6 @@ class Navigation:
 def not_configured():
     st.write("Streamlit Super App needs to be configured.")
 
-    # it needs a "pages" folder in the root directory
-    # with an __init__.py file
-
     st.write(
         "Please create a `pages` folder in the root directory of your Streamlit app."
     )
@@ -118,7 +115,6 @@ def not_configured():
     st.write("add this to")
     st.code("pages/hello/__init__.py")
 
-    #
     st.code(
         """
         import streamlit as st
