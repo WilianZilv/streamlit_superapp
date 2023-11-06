@@ -45,8 +45,7 @@ def main():
 In your main file, call streamlit_superapp's "run" function
 
 ```python
-import streamlit_superapp
-import streamlit as st
+import streamlit_superapp as app
 
 # Your code before initialization
 # Put your cool logo in the sidebar
@@ -55,7 +54,7 @@ import streamlit as st
 # Use your imagination
 
 # These are the default values, no need to provide them explicitly
-streamlit_superapp.run(
+app.run(
     hide_index_description = False,
     hide_home_button = False
 )
