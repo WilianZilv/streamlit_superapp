@@ -35,6 +35,11 @@ class Navigation:
 
         ss.reloaded = False
 
+        rerun = ss.get("do_rerun", False)
+
+        if rerun:
+            ss["do_rerun"] = False
+            st.rerun()
     @staticmethod
     def go(path: Union[str, Page]):
         if not isinstance(path, str):
@@ -45,9 +50,9 @@ class Navigation:
 
         st.session_state.page_changed = page_changed
         st.experimental_set_query_params(path=path)
-
-        if previous_path != path:
-            print("go:", previous_path, "->", path)
+        if page_changed:
+            # print("go:", previous_path, "->", path)
+            ss["do_rerun"] = True
 
     @staticmethod
     def current_path(default="pages"):
