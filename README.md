@@ -24,12 +24,10 @@ Create a `pages` folder in the root directory of your Streamlit app and organize
 ```
 pages/
 ├─  __init__.py
-├─  index/__init__.py
 └─  hello/__init__.py
 ```
 
 - **You can go beyond that, create as many levels as you want!**
-  **Just don't forget to create a "index/\_\_init\_\_.py" along side your pages to have a cool page indexer!**
 
 For instance, `pages/hello/__init__.py` can be:
 
@@ -60,7 +58,6 @@ import streamlit as st
 streamlit_superapp.run(
     hide_page_title=False,
     hide_index_title=False,
-    hide_sidebar_icon=False,
     hide_index_icon=False,
 )
 ```
@@ -70,7 +67,6 @@ streamlit_superapp.run(
 Easily edit and manage the state of DataFrames.
 
 ```python
-import numpy as np
 import pandas as pd
 import streamlit as st
 from streamlit_superapp.state import State
@@ -119,7 +115,6 @@ Create counters with persistent state.
 
 ```python
 import streamlit as st
-from common.tags import Tag
 from streamlit_superapp import State
 
 NAME = "Counter"

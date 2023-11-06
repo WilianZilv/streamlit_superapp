@@ -8,3 +8,10 @@ wheels/
 
 # venv
 .venv
+
+
+# node
+node_modules/
+
+# front-end
+!streamlit_superapp/frontend/build/
