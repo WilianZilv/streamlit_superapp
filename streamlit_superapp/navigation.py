@@ -12,6 +12,7 @@ from streamlit_superapp.typing import Page
 class Navigation:
     hide_page_title = False
     hide_home_button = False
+    hide_back_button = False
     hide_index_description = False
 
     @staticmethod
@@ -51,8 +52,10 @@ class Navigation:
                 if not Navigation.hide_home_button:
                     with c1:
                         components.go_home_link()
-                with c2:
-                    components.go_back_link()
+
+                if not Navigation.hide_back_button:
+                    with c2:
+                        components.go_back_link()
             if parent.sidebar is not None:
                 components.sidebar(page, variant=parent.sidebar)
 
