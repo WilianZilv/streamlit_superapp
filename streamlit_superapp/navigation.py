@@ -56,6 +56,10 @@ class Navigation:
                 if not Navigation.hide_back_button:
                     with c2:
                         components.go_back_link()
+
+            if parent.search:
+                components.search(page)
+
             if parent.sidebar is not None:
                 components.sidebar(page, variant=parent.sidebar)
 

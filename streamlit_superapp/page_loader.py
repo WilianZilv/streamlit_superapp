@@ -54,6 +54,7 @@ class PageLoader:
             file_name_normalized = file_name.replace("_", " ").title()
             sidebar = get_module_attr(module, "SIDEBAR", None)
             index = get_module_attr(module, "INDEX", None)
+            search = get_module_attr(module, "SEARCH", None)
 
             if isinstance(order, int):
                 order = str(order)
@@ -62,6 +63,8 @@ class PageLoader:
                 main = Index.main
                 name = name or file_name_normalized
                 icon = icon or "📖"
+
+                search = search or False
 
                 if index is False:
                     sidebar = sidebar or "radio"
@@ -82,6 +85,7 @@ class PageLoader:
                 order=order,
                 sidebar=sidebar,
                 index=index,
+                search=search,
             )
             pages.append(page)
 

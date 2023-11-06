@@ -77,6 +77,10 @@ def sidebar(page: Page, variant: Literal["selectbox", "radio"] = "radio", label=
         navigation.go(value)
 
 
+def search(page):
+    sidebar(page, variant="selectbox", label="Search")
+
+
 _RELEASE = True
 
 
