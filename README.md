@@ -47,17 +47,7 @@ In your main file, call streamlit_superapp's "run" function
 ```python
 import streamlit_superapp as app
 
-# Your code before initialization
-# Put your cool logo in the sidebar
-# Customize your styles
-# Insert your custom HTML
-# Use your imagination
-
-# These are the default values, no need to provide them explicitly
-app.run(
-    hide_index_description = False,
-    hide_home_button = False
-)
+app.run()
 ```
 
 ### Managing DataFrame State and Editing
