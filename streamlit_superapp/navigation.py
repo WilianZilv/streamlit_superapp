@@ -96,6 +96,9 @@ class Navigation:
 
     @staticmethod
     def find_page(path: str):
+        if "pages" not in ss:
+            PageLoader.initialize()
+
         pages: List[Page] = ss.pages
 
         for page in pages:
