@@ -25,13 +25,7 @@ class Navigation:
             ss.reloaded = True
 
         if "session_id" not in ss:
-            ss.session_id = get_query_params().get("session_id", [str(uuid4())])[0]
-
-            params = get_query_params()
-            if "session_id" in params:
-                del params["session_id"]
-
-            set_query_params(**params)
+            ss.session_id = str(uuid4())  # TODO: GET FROM COOKIES
 
         ss["navigation"] = Navigation
 
