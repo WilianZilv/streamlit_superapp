@@ -124,6 +124,9 @@ class Navigation:
 
     @staticmethod
     def render_page(page: Page):
+        if page.path != Navigation.current_path():
+            return
+
         signature = inspect.signature(page.main).parameters
 
         params = {}
