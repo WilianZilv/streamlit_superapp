@@ -56,9 +56,8 @@ import streamlit as st
 
 # These are the default values, no need to provide them explicitly
 streamlit_superapp.run(
-    hide_page_title=False,
-    hide_index_title=False,
-    hide_index_icon=False,
+    hide_index_description = False,
+    hide_home_button = False
 )
 ```
 
