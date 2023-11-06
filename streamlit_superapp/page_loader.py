@@ -24,7 +24,6 @@ class PageLoader:
 
         for path in paths:
             module_path = path[2:].replace(os.path.sep, ".").replace(".py", "")
-
             page_path = module_path.split(".")
 
             is__init__file = page_path[-1] == "__init__"
