@@ -18,7 +18,7 @@ class Page:
     sidebar: Optional[Literal["selectbox", "radio"]] = None
     index: Optional[bool] = None
 
-    def __dict__(self):
+    def serializable_dict(self):
         return {
             "path": self.path,
             "name": self.name,

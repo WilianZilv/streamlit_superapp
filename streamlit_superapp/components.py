@@ -90,5 +90,5 @@ else:
 
 
 def page_index(pages: List[Page], key=None):
-    _pages = [page.__dict__() for page in pages]
+    _pages = [page.serializable_dict() for page in pages]
     return _component_func(pages=_pages, key=key)

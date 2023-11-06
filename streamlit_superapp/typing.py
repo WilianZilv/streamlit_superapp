@@ -12,7 +12,7 @@ class Page(Protocol):
     sidebar: Optional[Literal["selectbox", "radio"]] = None
     index: Optional[bool] = None
 
-    def __dict__(self) -> dict:
+    def serializable_dict(self) -> dict:
         ...
 
     @property
