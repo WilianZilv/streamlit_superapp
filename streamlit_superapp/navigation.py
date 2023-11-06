@@ -41,8 +41,9 @@ class Navigation:
             path = path.path
 
         previous_path = Navigation.current_path(path)
+        page_changed = previous_path != path
 
-        st.session_state.page_changed = previous_path != path
+        st.session_state.page_changed = page_changed
         st.experimental_set_query_params(path=path)
 
         if previous_path != path:
