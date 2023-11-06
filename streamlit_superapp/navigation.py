@@ -11,9 +11,8 @@ from streamlit_superapp.typing import Page
 
 class Navigation:
     hide_page_title = False
-    hide_index_title = False
-    hide_sidebar_icon = False
-    hide_index_icon = False
+    hide_home_button = False
+    hide_index_description = False
 
     @staticmethod
     def initialize():

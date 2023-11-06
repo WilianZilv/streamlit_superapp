@@ -25,14 +25,8 @@ from streamlit_superapp.state import State
 from streamlit_superapp.page import Page
 
 
-def run(
-    hide_page_title=False,
-    hide_index_title=False,
-    hide_sidebar_icon=False,
-    hide_index_icon=False,
-):
-    Navigation.hide_page_title = hide_page_title
-    Navigation.hide_index_title = hide_index_title
-    Navigation.hide_sidebar_icon = hide_sidebar_icon
-    Navigation.hide_index_icon = hide_index_icon
+def run(hide_index_description: bool = False, hide_home_button: bool = False):
+    Navigation.hide_index_description = hide_index_description
+    Navigation.hide_home_button = hide_home_button
+
     Navigation.initialize()
