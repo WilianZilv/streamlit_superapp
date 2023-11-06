@@ -36,7 +36,7 @@ def go_back_link():
     )
 
 
-def sidebar(page: Page, variant: Literal["selectbox", "radio"] = "radio"):
+def sidebar(page: Page, variant: Literal["selectbox", "radio"] = "radio", label=None):
     parent = page.parent
 
     if not parent:
@@ -57,14 +57,16 @@ def sidebar(page: Page, variant: Literal["selectbox", "radio"] = "radio"):
 
     value = None
 
+    label = label or parent.name
+
     if variant == "selectbox":
         value = st.sidebar.selectbox(
-            parent.name, index=index, options=paths, format_func=format_func
+            label, index=index, options=paths, format_func=format_func
         )
 
     if variant == "radio":
         value = st.sidebar.radio(
-            parent.name, index=index, options=paths, format_func=format_func
+            label, index=index, options=paths, format_func=format_func
         )
 
     if value is None:
