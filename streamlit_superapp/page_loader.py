@@ -11,9 +11,11 @@ from streamlit import session_state as ss
 
 
 class PageLoader:
+    root = "pages"
+
     @staticmethod
     def initialize():
-        paths = glob.glob("./pages/**/*.py", recursive=True)
+        paths = glob.glob(f"./{PageLoader.root}/**/*.py", recursive=True)
 
         pages: List[Page] = []
 

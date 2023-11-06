@@ -94,7 +94,7 @@ class Navigation:
             ss["do_rerun"] = True
 
     @staticmethod
-    def current_path(default="pages"):
+    def current_path(default: str = PageLoader.root):
         return st.experimental_get_query_params().get("path", [default])[0]
 
     @staticmethod
@@ -110,7 +110,7 @@ class Navigation:
 
     @staticmethod
     def root():
-        root = Navigation.find_page("pages")
+        root = Navigation.find_page(PageLoader.root)
         if root is None:
             not_configured()
             st.stop()
