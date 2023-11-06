@@ -51,6 +51,7 @@ class PageLoader:
             order = get_module_attr(module, "ORDER", None)
             file_name_normalized = file_name.replace("_", " ").title()
             sidebar = get_module_attr(module, "SIDEBAR", None)
+            index = get_module_attr(module, "INDEX", None)
 
             if isinstance(order, int):
                 order = str(order)
@@ -59,6 +60,8 @@ class PageLoader:
                 main = Index.main
                 name = name or file_name_normalized
                 icon = icon or "📖"
+                if index is None:
+                    index = True
 
             if main is None:
                 continue
@@ -72,6 +75,7 @@ class PageLoader:
                 icon=icon or "📄",
                 order=order,
                 sidebar=sidebar,
+                index=index,
             )
             pages.append(page)
 

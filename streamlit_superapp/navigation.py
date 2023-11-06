@@ -28,12 +28,19 @@ class Navigation:
 
         path = Navigation.current_path()
 
-        Navigation.go(path)
-
         page = Navigation.find_page(path)
 
         if page is None:
             return
+
+        if page.index is not None:
+            if not page.index:
+                children = page.children
+                if len(children):
+                    page = children[0]
+                    path = page.path
+
+        Navigation.go(path)
 
         parent = page.parent
 

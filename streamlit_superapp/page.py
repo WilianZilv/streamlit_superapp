@@ -16,6 +16,7 @@ class Page:
     tag: Optional[str] = None
     order: Optional[str] = None
     sidebar: Optional[Literal["selectbox", "radio"]] = None
+    index: Optional[bool] = None
 
     def __dict__(self):
         return {
