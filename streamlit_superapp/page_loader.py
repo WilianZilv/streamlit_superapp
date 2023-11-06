@@ -60,6 +60,10 @@ class PageLoader:
                 main = Index.main
                 name = name or file_name_normalized
                 icon = icon or "📖"
+
+                if index is False:
+                    sidebar = sidebar or "radio"
+
                 if index is None:
                     index = True
 
