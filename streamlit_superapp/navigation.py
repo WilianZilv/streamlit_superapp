@@ -1,10 +1,6 @@
 from typing import List, Union
 from uuid import uuid4
-from streamlit import (
-    session_state as ss,
-    experimental_get_query_params as get_query_params,
-    experimental_set_query_params as set_query_params,
-)
+from streamlit import session_state as ss
 import streamlit as st
 
 import inspect
