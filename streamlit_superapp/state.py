@@ -91,7 +91,9 @@ class State(Generic[T]):
 
     @property
     def value(self) -> T:
-        value = cast(T, ss.get(self.updated_name, self.default_value))
+        value = cast(
+            T, ss.get(self.updated_name, ss.get(self.name, self.default_value))
+        )
 
         if self.name not in ss:
             Store.set(self.name, value)
