@@ -53,6 +53,9 @@ class State(Generic[T]):
         default_name = f"default:{name}"
         restored_name = f"restored:{name}"
 
+        if default_value is None:
+            self.default_value = Store.get(default_name, None)
+
         if default_value is not None:
             self.default_value = Store.set(default_name, default_value)
 
@@ -64,7 +67,7 @@ class State(Generic[T]):
 
             ss[restored_name] = True
 
-        self.key = Store.restore(key_name, str(uuid4()))
+        self.key = Store.get(key_name, str(uuid4()))
         Store.set(key_name, self.key)
 
         self.name = name

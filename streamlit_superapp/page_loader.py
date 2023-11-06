@@ -4,11 +4,9 @@ import os
 import sys
 from typing import List
 from streamlit_superapp.index import Index
-from streamlit_superapp.sidebar import Sidebar
 
 
 from streamlit_superapp.page import Page
-from streamlit_superapp.typing import available_variants
 from streamlit import session_state as ss
 
 
@@ -48,43 +46,32 @@ class PageLoader:
             main = get_module_attr(module, "main")
             name = get_module_attr(module, "NAME", None)
             description = get_module_attr(module, "DESCRIPTION", None)
-            variant = get_module_attr(module, "NAV", None)
             tag = get_module_attr(module, "TAG", None)
             icon = get_module_attr(module, "ICON", None)
             order = get_module_attr(module, "ORDER", None)
+            file_name_normalized = file_name.replace("_", " ").title()
+            sidebar = get_module_attr(module, "SIDEBAR", None)
 
             if isinstance(order, int):
                 order = str(order)
 
-            if file_name == "index":
-                variant = file_name
+            if main is None:
                 main = Index.main
-                name = name or "About"
+                name = name or file_name_normalized
                 icon = icon or "📖"
-
-            if main is None and (is__init__file or name):
-                variant = variant or "select_box"
-                main = Sidebar.main
-
-            if variant is not None and variant not in available_variants:
-                raise Exception(
-                    f"Invalid variant {variant} for {page_path}. Expected one of {available_variants}"
-                )
 
             if main is None:
                 continue
 
-            file_name_normalized = file_name.replace("_", " ").title()
-
             page = Page(
                 path=page_path,
                 main=main,
-                variant=variant,
                 name=name or file_name_normalized,
                 description=description,
                 tag=tag,
                 icon=icon or "📄",
                 order=order,
+                sidebar=sidebar,
             )
             pages.append(page)
 

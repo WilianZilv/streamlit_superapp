@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 
-from typing import Callable, List, Optional, cast
+from typing import Callable, List, Literal, Optional, cast
 from streamlit import session_state as ss
 
-from streamlit_superapp.typing import Navigation, Variant
+from streamlit_superapp.typing import Navigation
 
 
 @dataclass
@@ -13,9 +13,19 @@ class Page:
     name: str
     icon: str
     description: Optional[str] = None
-    variant: Optional[Variant] = None
     tag: Optional[str] = None
     order: Optional[str] = None
+    sidebar: Optional[Literal["selectbox", "radio"]] = None
+
+    def __dict__(self):
+        return {
+            "path": self.path,
+            "name": self.name,
+            "icon": self.icon,
+            "description": self.description,
+            "tag": self.tag,
+            "order": self.order,
+        }
 
     @property
     def is_active(self):
@@ -55,19 +65,6 @@ class Page:
         return cast(
             List[Page], [page for page in parent.children if page.path != self.path]
         )
-
-    @property
-    def nearest_gallery(self):
-        target = self
-        while True:
-            gallery = [n for n in target.neighbors if n.variant == "index"]
-            if len(gallery):
-                return gallery[0]
-
-            target = target.parent
-
-            if target is None:
-                return None
 
     def __str__(self) -> str:
         return self.name or self.path

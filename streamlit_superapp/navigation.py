@@ -24,14 +24,32 @@ class Navigation:
 
         ss["navigation"] = Navigation
 
-        Navigation.go(Navigation.current_path())
-
         PageLoader.initialize()
 
-        with st.sidebar:
-            components.home_link()
+        path = Navigation.current_path()
 
-        Navigation.render_page(Navigation.root())
+        Navigation.go(path)
+
+        page = Navigation.find_page(path)
+
+        if page is None:
+            return
+
+        parent = page.parent
+
+        if parent is not None:
+            with st.sidebar:
+                c1, c2 = st.columns(2)
+
+                if not Navigation.hide_home_button:
+                    with c1:
+                        components.go_home_link()
+                with c2:
+                    components.go_back_link()
+            if parent.sidebar is not None:
+                components.sidebar(page, variant=parent.sidebar)
+
+        Navigation.render_page(page)
 
         ss.reloaded = False
 
@@ -40,6 +58,17 @@ class Navigation:
         if rerun:
             ss["do_rerun"] = False
             st.rerun()
+
+    @staticmethod
+    def previous_path():
+        current_path = Navigation.current_path()
+
+        if "." not in current_path:
+            return current_path
+
+        tree = current_path.split(".")
+        return ".".join(tree[:-1])
+
     @staticmethod
     def go(path: Union[str, Page]):
         if not isinstance(path, str):
@@ -88,6 +117,9 @@ class Navigation:
         if "navigation" in signature:
             params["navigation"] = Navigation
 
+        if not Navigation.hide_page_title:
+            st.header(page.icon + " " + page.name)
+
         return page.main(**params)
 
 
@@ -102,7 +134,6 @@ def not_configured():
         """
         pages/
         ├─  __init__.py
-        ├─  index/__init__.py
         └─  hello/__init__.py
     """
     )

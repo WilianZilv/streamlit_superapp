@@ -1,8 +1,5 @@
 from typing import Callable, List, Literal, Optional, Protocol, Union
 
-Variant = Literal["select_box", "radio", "index"]
-available_variants = ["select_box", "radio", "index"]
-
 
 class Page(Protocol):
     path: str
@@ -10,9 +7,12 @@ class Page(Protocol):
     name: str
     icon: str
     description: Optional[str] = None
-    variant: Optional[Variant] = None
     tag: Optional[str] = None
     order: Optional[str] = None
+    sidebar: Optional[Literal["selectbox", "radio"]] = None
+
+    def __dict__(self) -> dict:
+        ...
 
     @property
     def is_active(self) -> bool:
@@ -36,10 +36,12 @@ class Page(Protocol):
 
 
 class Navigation(Protocol):
-    hide_page_title: bool
-    hide_index_title: bool
-    hide_sidebar_icon: bool
-    hide_index_icon: bool
+    hide_index_description: bool
+    hide_home_button: bool
+
+    @staticmethod
+    def previous_path() -> str:
+        ...
 
     @staticmethod
     def find_page(path: str) -> Optional[Page]:
