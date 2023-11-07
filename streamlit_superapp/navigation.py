@@ -63,7 +63,8 @@ class Navigation:
             if parent.sidebar is not None:
                 components.sidebar(page, variant=parent.sidebar)
 
-        Navigation.render_page(page)
+        if not ss.get("page_changed", False):
+            Navigation.render_page(page)
 
         ss.reloaded = False
 
