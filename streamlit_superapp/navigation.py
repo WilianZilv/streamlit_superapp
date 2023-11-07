@@ -6,6 +6,7 @@ import streamlit as st
 import inspect
 from streamlit_superapp import components
 from streamlit_superapp.page_loader import PageLoader
+from streamlit_superapp.state import State
 from streamlit_superapp.typing import Page
 
 
@@ -95,6 +96,7 @@ class Navigation:
         st.session_state.page_changed = page_changed
         st.experimental_set_query_params(path=path)
         if page_changed:
+            State.save()
             # print("go:", previous_path, "->", path)
             ss["do_rerun"] = True
 
