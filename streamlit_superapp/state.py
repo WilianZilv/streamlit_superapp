@@ -6,6 +6,8 @@ from streamlit_superapp.typing import Page
 
 T = TypeVar("T")
 
+STATES_KEY = "streamlit_superapp:states"
+
 
 class Store:
     data = {}
@@ -53,6 +55,11 @@ class State(Generic[T]):
         default_name = f"default:{name}"
         restored_name = f"restored:{name}"
 
+        if STATES_KEY not in ss:
+            ss[STATES_KEY] = {}
+
+        ss[STATES_KEY][name] = self
+
         if default_value is None:
             self.default_value = Store.get(default_name, None)
 
@@ -77,6 +84,13 @@ class State(Generic[T]):
         self.default_name = default_name
         self.restored_name = restored_name
         self.value
+
+    @staticmethod
+    def save():
+        if STATES_KEY not in ss:
+            return
+
+        [state.value for state in ss[STATES_KEY].values()]
 
     @property
     def initial_value(self) -> T:
