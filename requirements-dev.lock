@@ -30,6 +30,7 @@ packaging==23.2
 pandas==2.1.2
 pillow==10.1.0
 protobuf==4.25.0
+ptvsd==4.3.2
 pyarrow==14.0.0
 pydeck==0.8.1b0
 pygments==2.16.1

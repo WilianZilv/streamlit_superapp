@@ -3,7 +3,8 @@ name = "streamlit-superapp"
 version = "1.0.7"
 description = ""
 authors = [{ name = "Wilian", email = "wilianzilv@gmail.com" }]
-dependencies = []
+dependencies = [
+]
 readme = "README.md"
 requires-python = ">= 3.8"
 
@@ -16,7 +17,10 @@ build-backend = "hatchling.build"
 
 [tool.rye]
 managed = true
-dev-dependencies = ["streamlit>=1.28.1"]
+dev-dependencies = [
+    "streamlit>=1.28.1",
+    "ptvsd>=4.3.2",
+]
 
 [tool.hatch.metadata]
 allow-direct-references = true
