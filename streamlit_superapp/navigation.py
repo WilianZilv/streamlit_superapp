@@ -76,14 +76,27 @@ class Navigation:
             st.rerun()
 
     @staticmethod
-    def previous_path():
-        current_path = Navigation.current_path()
+    def previous_path(path: Optional[str] = None):
+        current_path = path
+        if current_path is None:
+            current_path = Navigation.current_path()
 
         if "." not in current_path:
             return current_path
 
         tree = current_path.split(".")
-        return ".".join(tree[:-1])
+        path = ".".join(tree[:-1])
+
+        page = Navigation.find_page(path)
+
+        if page is None:
+            return current_path
+
+        if page.index is not None:
+            if not page.index:
+                return Navigation.previous_path(page.path)
+
+        return path
 
     @staticmethod
     def go(path: Union[str, Page]):
