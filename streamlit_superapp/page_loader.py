@@ -10,7 +10,7 @@ from streamlit_superapp.index import Index
 from streamlit_superapp.page import Page
 from streamlit import session_state as ss
 
-last_page_update = 0
+last_page_update = -1
 
 
 class PageLoader:
