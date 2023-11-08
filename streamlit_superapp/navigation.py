@@ -61,15 +61,14 @@ class Navigation:
             if parent.sidebar is not None:
                 components.sidebar(page, variant=parent.sidebar)
 
-        if not ss.get("page_changed", False):
+        if "do_rerun" not in ss:
+            ss.do_rerun = False
+
+        if not ss.do_rerun:
             Navigation.render_page(page)
 
-        ss.reloaded = False
-
-        rerun = ss.get("do_rerun", False)
-
-        if rerun:
-            ss["do_rerun"] = False
+        if ss.do_rerun:
+            ss.do_rerun = False
             st.rerun()
 
     @staticmethod
@@ -103,7 +102,6 @@ class Navigation:
         previous_path = Navigation.current_path(path)
         page_changed = previous_path != path
 
-        st.session_state.page_changed = page_changed
         st.experimental_set_query_params(path=path)
         if page_changed:
             State.save_all()
