@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import List, Optional, Union
 from uuid import uuid4
 from streamlit import session_state as ss
 import streamlit as st
