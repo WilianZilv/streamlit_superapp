@@ -83,14 +83,16 @@ class State(Generic[T]):
         self.previous_name = previous_name
         self.default_name = default_name
         self.restored_name = restored_name
-        self.value
 
     @staticmethod
-    def save():
+    def save_all():
         if STATES_KEY not in ss:
             return
 
-        [state.value for state in ss[STATES_KEY].values()]
+        [state.save() for state in ss[STATES_KEY].values()]
+
+    def save(self):
+        Store.set(self.name, ss.get(self.updated_name, self.default_value))
 
     @property
     def initial_value(self) -> T:
@@ -105,17 +107,7 @@ class State(Generic[T]):
 
     @property
     def value(self) -> T:
-        value = cast(
-            T, ss.get(self.updated_name, ss.get(self.name, self.default_value))
-        )
-
-        if self.name not in ss:
-            Store.set(self.name, value)
-
-        if ss.get("page_changed", False) or ss.reloaded:
-            Store.set(self.name, value)
-
-        return value
+        return cast(T, ss.get(self.updated_name, ss.get(self.name, self.default_value)))
 
     @value.setter
     def value(self, value: T):
