@@ -1,5 +1,6 @@
 import streamlit as st
 from streamlit import session_state as ss
+from streamlit_superapp.state import State
 
 from streamlit_superapp.typing import Navigation, Page
 
@@ -57,22 +58,36 @@ def sidebar(page: Page, variant: Literal["selectbox", "radio"] = "radio", label=
 
     value = None
 
+    state = State("page_index", default_value=index, key=parent)
+
+    if state.initial_value != index:
+        state.initial_value = index
+
     label = label or parent.name
 
     if variant == "selectbox":
         value = st.sidebar.selectbox(
-            label, index=index, options=paths, format_func=format_func
+            label,
+            index=state.initial_value,
+            options=paths,
+            format_func=format_func,
+            key=state.key + ":selectbox",
         )
 
     if variant == "radio":
         value = st.sidebar.radio(
-            label, index=index, options=paths, format_func=format_func
+            label,
+            index=state.initial_value,
+            options=paths,
+            format_func=format_func,
+            key=state.key + ":radio",
         )
 
     if value is None:
         return
 
     if value != page.path:
+        state.initial_value = paths.index(value)
         navigation: Navigation = ss["navigation"]
         navigation.go(value)
 
