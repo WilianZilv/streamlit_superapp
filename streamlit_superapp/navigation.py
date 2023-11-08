@@ -18,9 +18,6 @@ class Navigation:
 
     @staticmethod
     def initialize():
-        if "reloaded" not in ss:
-            ss.reloaded = True
-
         if "session_id" not in ss:
             ss.session_id = str(uuid4())  # TODO: GET FROM COOKIES
 
