@@ -109,7 +109,7 @@ class Navigation:
         st.session_state.page_changed = page_changed
         st.experimental_set_query_params(path=path)
         if page_changed:
-            State.save()
+            State.save_all()
             # print("go:", previous_path, "->", path)
             ss["do_rerun"] = True
 
