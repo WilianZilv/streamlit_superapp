@@ -2,6 +2,7 @@ import glob
 from importlib import import_module
 import os
 import sys
+import time
 from typing import List
 from streamlit_superapp.index import Index
 
@@ -9,13 +10,26 @@ from streamlit_superapp.index import Index
 from streamlit_superapp.page import Page
 from streamlit import session_state as ss
 
+last_page_update = 0
+
 
 class PageLoader:
     root = "pages"
 
     @staticmethod
     def initialize():
-        paths = glob.glob(f"./{PageLoader.root}/**/*.py", recursive=True)
+        now = time.time()
+
+        global last_page_update
+
+        if now - last_page_update < 1:
+            return
+
+        paths = ss.get("page_loader_paths", None)
+
+        if paths is None:
+            paths = glob.glob(f"./{PageLoader.root}/**/*.py", recursive=True)
+            ss.page_loader_paths = paths
 
         pages: List[Page] = []
 
@@ -91,6 +105,7 @@ class PageLoader:
         pages = sorted(pages, key=lambda page: page.order or page.name)
 
         ss.pages = pages
+        last_page_update = now
 
 
 def get_module_attr(module, attr, default=None):
