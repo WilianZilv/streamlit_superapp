@@ -68,8 +68,8 @@ class State(Generic[T]):
 
         if restored_name not in ss and cache:
             Store.restore(key_name, str(uuid4()))
-            Store.restore(name, default_value)
             Store.restore(updated_name, default_value)
+            ss[name] = ss[updated_name]
             ss[previous_name] = ss[updated_name]
 
             ss[restored_name] = True
