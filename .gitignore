@@ -15,3 +15,5 @@ node_modules/
 
 # front-end
 !streamlit_superapp/frontend/build/
+pages
+app.py
