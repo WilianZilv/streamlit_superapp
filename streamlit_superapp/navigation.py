@@ -19,7 +19,7 @@ class Navigation:
     @staticmethod
     def initialize():
         if "session_id" not in ss:
-            ss.session_id = str(uuid4())  # TODO: GET FROM COOKIES
+            ss.session_id = "global_session"  # TODO: GET FROM COOKIES
 
         ss["navigation"] = Navigation
 
