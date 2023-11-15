@@ -100,6 +100,9 @@ class Navigation:
             path = path.path
 
         previous_path = Navigation.current_path(path)
+
+        ss["navigation:previous_path"] = previous_path
+
         page_changed = previous_path != path
 
         st.experimental_set_query_params(path=path)
