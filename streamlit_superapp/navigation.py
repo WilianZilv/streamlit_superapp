@@ -61,6 +61,9 @@ class Navigation:
             if parent.sidebar is not None:
                 components.sidebar(page, variant=parent.sidebar)
 
+        if not Navigation.hide_breadcrumbs:
+            components.breadcrumbs(Navigation.current_path())
+
         if "do_rerun" not in ss:
             ss.do_rerun = False
 
