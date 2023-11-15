@@ -1,6 +1,6 @@
 [project]
 name = "streamlit-superapp"
-version = "1.1.31"
+version = "1.1.32"
 description = ""
 authors = [{ name = "Wilian", email = "wilianzilv@gmail.com" }]
 dependencies = [
