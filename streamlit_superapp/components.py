@@ -99,17 +99,26 @@ def search(page):
 _RELEASE = True
 
 
-if not _RELEASE:
-    _component_func = components.declare_component(
-        "page_index",
-        url="http://localhost:3001",
-    )
-else:
+def declare_component(name: str):
     parent_dir = os.path.dirname(os.path.abspath(__file__))
-    build_dir = os.path.join(parent_dir, "frontend/build")
-    _component_func = components.declare_component("page_index", path=build_dir)
+
+    if not _RELEASE:
+        with open(os.path.join(parent_dir, "web", name, ".env"), "r") as f:
+            _env = f.readlines()
+            port = [line for line in _env if line.startswith("PORT=")][0].split("=")[1]
+
+        return components.declare_component(
+            name,
+            url=f"http://localhost:{port}",
+        )
+
+    build_dir = os.path.join(parent_dir, f"web/{name}/build")
+    return components.declare_component(name, path=build_dir)
 
 
 def page_index(pages: List[Page], key=None):
+    _component_func = declare_component("page_index")
+
     _pages = [page.serializable_dict() for page in pages]
     return _component_func(pages=_pages, key=key)
+
