@@ -55,9 +55,6 @@ class Breadcrumbs extends StreamlitComponentBase {
 
   public render = (): ReactNode => {
     const pages = this.props.args["pages"];
-    const current_path = this.props.args["current_path"];
-
-    console.log(this.props);
 
     return (
       <div style={containerStyle}>
