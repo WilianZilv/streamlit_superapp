@@ -122,3 +122,38 @@ def page_index(pages: List[Page], key=None):
     _pages = [page.serializable_dict() for page in pages]
     return _component_func(pages=_pages, key=key)
 
+
+def breadcrumbs(current_path: str):
+    _component_func = declare_component("breadcrumbs")
+
+    navigation: Navigation = ss["navigation"]
+
+    current_path = navigation.current_path()
+
+    current_page = navigation.find_page(current_path)
+
+    if current_page is None:
+        return
+
+    ancestors = []
+
+    while True:
+        if current_page is None:
+            break
+
+        ancestors = [current_page, *ancestors]
+
+        current_page = current_page.parent
+
+    pages = [page.serializable_dict() for page in ancestors]
+
+    previous_path = None
+
+    if "navigation:previous_path" in ss:
+        previous_path = ss["navigation:previous_path"]
+
+    next_value = _component_func(pages=pages, current_path=current_path, default=None)
+
+    if next_value is not None and next_value != previous_path:
+        navigation.go(next_value)
+        st.rerun()
