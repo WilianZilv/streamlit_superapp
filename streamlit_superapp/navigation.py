@@ -45,15 +45,16 @@ class Navigation:
 
         if parent is not None:
             with st.sidebar:
-                c1, c2 = st.columns(2)
+                if not Navigation.hide_home_button or not Navigation.hide_back_button:
+                    c1, c2 = st.columns(2)
 
-                if not Navigation.hide_home_button:
-                    with c1:
-                        components.go_home_link()
+                    if not Navigation.hide_home_button:
+                        with c1:
+                            components.go_home_link()
 
-                if not Navigation.hide_back_button:
-                    with c2:
-                        components.go_back_link()
+                    if not Navigation.hide_back_button:
+                        with c2:
+                            components.go_back_link()
 
             if parent.search:
                 components.search(page)
