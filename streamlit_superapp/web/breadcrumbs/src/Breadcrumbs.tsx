@@ -42,7 +42,6 @@ function Link({ page, is_last }: LinkProps) {
 
   return (
     <span style={style} onClick={handleClick}>
-      {is_last ? page.icon : null}
       {page.name}
       {step}
     </span>
