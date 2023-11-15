@@ -38,9 +38,11 @@ class Page(Protocol):
 
 
 class Navigation(Protocol):
+    hide_page_title: bool
     hide_index_description: bool
     hide_home_button: bool
     hide_back_button: bool
+    hide_breadcrumbs: bool
 
     @staticmethod
     def previous_path() -> str:
