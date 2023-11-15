@@ -27,6 +27,7 @@ class Page:
             "description": self.description,
             "tag": self.tag,
             "order": self.order,
+            "index": self.index,
         }
 
     @property
