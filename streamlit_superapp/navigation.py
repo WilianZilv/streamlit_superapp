@@ -14,6 +14,7 @@ class Navigation:
     hide_home_button = False
     hide_back_button = False
     hide_index_description = False
+    hide_breadcrumbs = False
 
     @staticmethod
     def initialize():
