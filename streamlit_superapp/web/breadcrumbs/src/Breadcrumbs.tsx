@@ -59,7 +59,7 @@ class Breadcrumbs extends StreamlitComponentBase {
     return (
       <div style={containerStyle}>
         {pages.map((page: IPage, index: number) => (
-          <Link page={page} is_last={index === pages.length - 1} />
+          <Link key={index} page={page} is_last={index === pages.length - 1} />
         ))}
       </div>
     );
