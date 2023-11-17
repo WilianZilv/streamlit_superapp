@@ -98,8 +98,8 @@ export default function Page({ page, theme, onClick }: Props) {
       </span>
       <div style={gap}></div>
       {description &&
-        description.split("\n").map((line: string) => (
-          <span style={descriptionStyle}>
+        description.split("\n").map((line: string, i: number) => (
+          <span key={i} style={descriptionStyle}>
             {line}
             <br />
           </span>

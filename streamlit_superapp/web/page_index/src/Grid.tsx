@@ -3,7 +3,7 @@ import {
   StreamlitComponentBase,
   withStreamlitConnection,
 } from "streamlit-component-lib";
-import React, { ReactNode } from "react";
+import React, { Fragment, ReactNode } from "react";
 import Page, { IPage } from "./Card";
 
 const gridStyle: React.CSSProperties = {
@@ -71,12 +71,13 @@ class Grid extends StreamlitComponentBase {
 
     return Object.keys(groups).map((tag) => {
       return (
-        <>
+        <Fragment key={tag}>
           {render_tags && <h3 style={tagStyle}>{tag}</h3>}
           <div style={gridStyle}>
             {groups[tag].map((page: IPage) => {
               return (
                 <Page
+                  key={page.path}
                   page={page}
                   theme={theme}
                   onClick={this.handlePageClick}
@@ -84,7 +85,7 @@ class Grid extends StreamlitComponentBase {
               );
             })}
           </div>
-        </>
+        </Fragment>
       );
     });
   };
