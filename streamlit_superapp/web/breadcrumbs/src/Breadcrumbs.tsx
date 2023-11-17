@@ -8,8 +8,8 @@ import React, { ReactNode } from "react";
 const containerStyle: React.CSSProperties = {
   fontFamily: "Source Sans Pro Regular",
   cursor: "pointer",
-  height: "100%",
-  marginBottom: "24px",
+  marginLeft: "-8px",
+  paddingBottom: "4px",
 };
 
 const currentPathStyle: React.CSSProperties = {
