@@ -18,8 +18,14 @@ const currentPathStyle: React.CSSProperties = {
   fontWeight: "bold",
 };
 
+interface IPage {
+  name: string;
+  path: string;
+  index: boolean | null;
+}
+
 interface LinkProps {
-  page: any;
+  page: IPage;
   is_last: boolean;
 }
 
@@ -48,11 +54,11 @@ function Link({ page, is_last }: LinkProps) {
 
 class Breadcrumbs extends StreamlitComponentBase {
   public render = (): ReactNode => {
-    const pages = this.props.args["pages"];
+    const pages: IPage[] = this.props.args["pages"];
 
     return (
       <div style={containerStyle}>
-        {pages.map((page: any, index: number) => (
+        {pages.map((page: IPage, index: number) => (
           <Link page={page} is_last={index === pages.length - 1} />
         ))}
       </div>
