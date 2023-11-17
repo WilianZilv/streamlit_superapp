@@ -31,8 +31,6 @@ function Link({ page, is_last }: LinkProps) {
       }
     }
 
-    console.log(page);
-
     Streamlit.setComponentValue(page.path);
   }
 
@@ -49,10 +47,6 @@ function Link({ page, is_last }: LinkProps) {
 }
 
 class Breadcrumbs extends StreamlitComponentBase {
-  private handleClick = (path: string): void => {
-    Streamlit.setComponentValue(path);
-  };
-
   public render = (): ReactNode => {
     const pages = this.props.args["pages"];
 
