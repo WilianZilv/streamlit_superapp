@@ -60,7 +60,7 @@ interface Props {
 }
 
 export default function Page({ page, theme, onClick }: Props) {
-  const { name, icon, description, path, tag }: IPage = page;
+  const { name, icon, description }: IPage = page;
 
   const [hover, setHover] = React.useState(false);
 
