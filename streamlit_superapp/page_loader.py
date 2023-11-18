@@ -22,8 +22,11 @@ class PageLoader:
 
         global last_page_update
 
-        if now - last_page_update < 1:
-            return
+        _pages = ss.get("pages", [])
+
+        if len(_pages):
+            if now - last_page_update < 1:
+                return
 
         paths = ss.get("page_loader_paths", None)
 
