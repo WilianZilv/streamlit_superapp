@@ -18,6 +18,7 @@ class Page:
     sidebar: Optional[Literal["selectbox", "radio"]] = None
     index: Optional[bool] = None
     search: Optional[bool] = None
+    hidden: bool = False
 
     def serializable_dict(self):
         return {
@@ -28,6 +29,7 @@ class Page:
             "tag": self.tag,
             "order": self.order,
             "index": self.index,
+            "hidden": self.hidden,
         }
 
     @property

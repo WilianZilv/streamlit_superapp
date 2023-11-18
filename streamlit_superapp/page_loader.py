@@ -68,6 +68,7 @@ class PageLoader:
             sidebar = get_module_attr(module, "SIDEBAR", None)
             index = get_module_attr(module, "INDEX", None)
             search = get_module_attr(module, "SEARCH", None)
+            hidden = get_module_attr(module, "HIDDEN", False)
 
             if isinstance(order, int):
                 order = str(order)
@@ -99,6 +100,7 @@ class PageLoader:
                 sidebar=sidebar,
                 index=index,
                 search=search,
+                hidden=hidden,
             )
             pages.append(page)
 

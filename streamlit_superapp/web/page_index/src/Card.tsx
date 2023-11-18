@@ -12,6 +12,7 @@ export interface IPage {
   path: string;
   tag: string | null;
   theme: any;
+  hidden: boolean;
 }
 
 interface State {

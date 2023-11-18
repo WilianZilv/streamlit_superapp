@@ -25,8 +25,10 @@ class Grid extends StreamlitComponentBase {
   };
 
   public render = (): ReactNode => {
-    const pages: IPage[] = this.props.args["pages"];
+    let pages: IPage[] = this.props.args["pages"];
     const { theme } = this.props;
+
+    pages = pages.filter((page) => !page.hidden);
 
     let tags: string[] = [];
 
