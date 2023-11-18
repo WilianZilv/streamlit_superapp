@@ -31,11 +31,13 @@ def run(
     hide_back_button: bool = False,
     hide_page_title: bool = False,
     hide_breadcrumbs: bool = False,
+    use_query_params: bool = True,
 ):
     Navigation.hide_index_description = hide_index_description
     Navigation.hide_home_button = hide_home_button
     Navigation.hide_back_button = hide_back_button
     Navigation.hide_page_title = hide_page_title
     Navigation.hide_breadcrumbs = hide_breadcrumbs
+    Navigation.use_query_params = use_query_params
 
     Navigation.initialize()

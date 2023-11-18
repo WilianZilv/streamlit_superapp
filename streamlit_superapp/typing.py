@@ -44,6 +44,7 @@ class Navigation(Protocol):
     hide_home_button: bool
     hide_back_button: bool
     hide_breadcrumbs: bool
+    use_query_params: bool
 
     @staticmethod
     def previous_path() -> str:
