@@ -56,6 +56,10 @@ class Breadcrumbs extends StreamlitComponentBase {
   public render = (): ReactNode => {
     const pages: IPage[] = this.props.args["pages"];
 
+    if (pages.length === 1) {
+      return null;
+    }
+
     return (
       <div style={containerStyle}>
         {pages.map((page: IPage, index: number) => (
