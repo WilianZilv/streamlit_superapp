@@ -78,6 +78,26 @@ class Navigation:
             st.rerun()
 
     @staticmethod
+    def pages() -> List["Page"]:
+        pages: List[Page] = ss.pages
+
+        _pages: List[Page] = []
+
+        for page in pages:
+            if page.access is True:
+                continue
+
+            if callable(page.access):
+                params = Navigation.discover_params(page.access, page)
+
+                if not page.access(**params):
+                    continue
+
+            _pages.append(page)
+
+        return _pages
+
+    @staticmethod
     def previous_path(path: Optional[str] = None):
         current_path = path
         if current_path is None:
@@ -136,7 +156,7 @@ class Navigation:
         if "pages" not in ss:
             PageLoader.initialize()
 
-        pages: List[Page] = ss.pages
+        pages = Navigation.pages()
 
         for page in pages:
             if page.path == path:
