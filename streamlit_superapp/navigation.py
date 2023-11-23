@@ -153,8 +153,8 @@ class Navigation:
         return root
 
     @staticmethod
-    def render_page(page: Page):
-        signature = inspect.signature(page.main).parameters
+    def discover_params(func: Callable, page: Page):
+        signature = inspect.signature(func).parameters
 
         params = {}
 
@@ -163,6 +163,12 @@ class Navigation:
 
         if "navigation" in signature:
             params["navigation"] = Navigation
+
+        return params
+
+    @staticmethod
+    def render_page(page: Page):
+        params = Navigation.discover_params(page.main, page)
 
         if not Navigation.hide_page_title:
             st.header(page.icon + " " + page.name)
