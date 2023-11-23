@@ -31,7 +31,8 @@ class Navigation:
         page = Navigation.find_page(path)
 
         if page is None:
-            return
+            page = Navigation.root()
+            path = page.path
 
         if page.index is not None:
             if not page.index:
