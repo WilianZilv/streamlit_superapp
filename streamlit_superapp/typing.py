@@ -70,3 +70,7 @@ class Navigation(Protocol):
     @staticmethod
     def current_path(default: str = "pages") -> str:
         ...
+
+    @staticmethod
+    def pages() -> List[Page]:
+        ...

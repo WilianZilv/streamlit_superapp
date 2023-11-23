@@ -19,6 +19,7 @@ class Page:
     index: Optional[bool] = None
     search: Optional[bool] = None
     hidden: bool = False
+    access: Optional[Callable] = None
 
     def serializable_dict(self):
         return {
