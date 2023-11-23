@@ -72,6 +72,11 @@ class PageLoader:
             index = get_module_attr(module, "INDEX", None)
             search = get_module_attr(module, "SEARCH", None)
             hidden = get_module_attr(module, "HIDDEN", False)
+            access = get_module_attr(module, "ACCESS", None)
+
+            if access is not None:
+                if not callable(access):
+                    raise ValueError(f"ACCESS must be a function, not {type(access)}.")
 
             if isinstance(order, int):
                 order = str(order)
@@ -104,6 +109,7 @@ class PageLoader:
                 index=index,
                 search=search,
                 hidden=hidden,
+                access=access,
             )
             pages.append(page)
 
