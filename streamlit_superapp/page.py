@@ -47,7 +47,9 @@ class Page:
 
     @property
     def children(self):
-        pages: List[Page] = ss.pages
+        navigation: Navigation = ss["navigation"]
+
+        pages = navigation.pages()
         target = self.path + "."
 
         def is_child(page: Page):
@@ -59,7 +61,7 @@ class Page:
 
             return "." not in page.path[len(target) :]
 
-        return [page for page in pages if is_child(page)]
+        return [page for page in pages if is_child(cast(Page, page))]
 
     @property
     def neighbors(self) -> List["Page"]:
