@@ -21,8 +21,12 @@ except AttributeError:
 
 
 from streamlit_superapp.navigation import Navigation
+from streamlit_superapp.page_loader import PageLoader
 from streamlit_superapp.state import State
 from streamlit_superapp.page import Page
+from streamlit_superapp.widgets import *
+
+PageLoader.initialize()
 
 
 def run(
