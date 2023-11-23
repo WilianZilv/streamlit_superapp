@@ -128,6 +128,13 @@ class Navigation:
 
     @staticmethod
     def go(path: Union[str, Page]):
+        page = cast(Page, path)
+
+        if isinstance(path, str):
+            page = Navigation.find_page(path)
+            if page is None:
+                page = Navigation.root()
+
         if not isinstance(path, str):
             path = path.path
 
