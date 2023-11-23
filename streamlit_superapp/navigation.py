@@ -150,6 +150,9 @@ class Navigation:
             path_state = State("navigation:path", default_value=path)
             path_state.initial_value = path
 
+        page_state = State("navigation:current_page", default_value=page)
+        page_state.initial_value = page
+
         if page_changed:
             State.save_all()
             # print("go:", previous_path, "->", path)
@@ -163,6 +166,12 @@ class Navigation:
         path_state = State("navigation:path", default_value=default)
 
         return path_state.initial_value
+
+    @staticmethod
+    def current_page():
+        page_state = State[Page]("navigation:current_page", default_value=None)
+
+        return page_state.initial_value
 
     @staticmethod
     def find_page(path: str):
