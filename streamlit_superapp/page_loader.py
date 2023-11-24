@@ -78,6 +78,7 @@ class PageLoader:
             search = get_module_attr(module, "SEARCH", None)
             hidden = get_module_attr(module, "HIDDEN", False)
             access = get_module_attr(module, "ACCESS", None)
+            redirect = get_module_attr(module, "REDIRECT", None)
 
             if access is not None:
                 if not callable(access):
@@ -115,6 +116,7 @@ class PageLoader:
                 search=search,
                 hidden=hidden,
                 access=access,
+                redirect=redirect,
             )
             pages.append(page)
 

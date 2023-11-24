@@ -1,4 +1,4 @@
-from typing import Callable, List, Literal, Optional, Protocol, Union
+from typing import Callable, List, Literal, Optional, Protocol, Tuple, Union
 
 
 class Page(Protocol):
@@ -14,6 +14,7 @@ class Page(Protocol):
     search: Optional[bool] = None
     hidden: bool = False
     access: Optional[Callable] = None
+    redirect: Optional[Union[Callable, Tuple[Callable, str]]] = None
 
     def serializable_dict(self) -> dict:
         ...

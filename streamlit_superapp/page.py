@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from typing import Callable, List, Literal, Optional, cast
+from typing import Callable, List, Literal, Optional, Tuple, Union, cast
 from streamlit import session_state as ss
 
 from streamlit_superapp.typing import Navigation
@@ -20,6 +20,7 @@ class Page:
     search: Optional[bool] = None
     hidden: bool = False
     access: Optional[Callable] = None
+    redirect: Optional[Union[Callable, Tuple[Callable, str]]] = None
 
     def serializable_dict(self):
         return {

@@ -41,6 +41,11 @@ class Navigation:
                     page = children[0]
                     path = page.path
 
+        result = handle_redirect(page)
+
+        if isinstance(result, tuple):
+            page, path = result
+
         if page.access is not None:
             params = Navigation.discover_params(page.access, page)
             if not page.access(**params):
@@ -256,6 +261,29 @@ class Navigation:
             st.header(page.icon + " " + page.name)
 
         return page.main(**params)
+
+
+def handle_redirect(page: Page):
+    if page.redirect is None:
+        return
+
+    if isinstance(page.redirect, tuple):
+        func, path = page.redirect
+
+        params = Navigation.discover_params(func, page)
+        valid = func(**params)
+
+        if valid:
+            return Navigation.find_page(path) or Navigation.root(), path
+
+    func = page.redirect
+
+    if callable(func):
+        params = Navigation.discover_params(func, page)
+        path = func(**params)
+
+        if isinstance(path, str):
+            return Navigation.find_page(path) or Navigation.root(), path
 
 
 def not_configured():
