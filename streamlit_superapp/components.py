@@ -147,13 +147,17 @@ def breadcrumbs(current_path: str):
 
     pages = [page.serializable_dict() for page in ancestors]
 
-    previous_path = None
+    k = "navigation:breadcrumbs:path"
 
-    if "navigation:previous_path" in ss:
-        previous_path = ss["navigation:previous_path"]
+    previous_value = ss.get(k, None)
 
     next_value = _component_func(pages=pages, current_path=current_path, default=None)
 
-    if next_value is not None and next_value != previous_path:
+    ss[k] = next_value
+
+    if previous_value == next_value:
+        return
+
+    if next_value is not None:
         navigation.go(next_value)
         st.rerun()
