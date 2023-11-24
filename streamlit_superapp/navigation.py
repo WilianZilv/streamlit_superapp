@@ -47,6 +47,22 @@ class Navigation:
                 page = Navigation.root()
                 path = page.path
 
+        if page.access is None:
+            guard_page = page.parent
+
+            while True:
+                if guard_page is None:
+                    break
+
+                if guard_page.access is not None:
+                    params = Navigation.discover_params(guard_page.access, guard_page)
+                    if not guard_page.access(**params):
+                        page = Navigation.root()
+                        path = page.path
+
+                    break
+                guard_page = guard_page.parent
+
         Navigation.go(path)
 
         parent = page.parent
