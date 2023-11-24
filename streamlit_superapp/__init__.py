@@ -28,6 +28,8 @@ from streamlit_superapp.widgets import *
 
 PageLoader.initialize()
 
+inject = Navigation.inject
+
 
 def run(
     hide_index_description: bool = False,

@@ -214,6 +214,13 @@ class Navigation:
         return root
 
     @staticmethod
+    def inject(**kwargs):
+        if "page" in kwargs or "navigation" in kwargs:
+            raise Exception("Cannot inject 'page' or 'navigation'.")
+
+        ss["navigation:inject"] = kwargs
+
+    @staticmethod
     def discover_params(func: Callable, page: Page):
         signature = inspect.signature(func).parameters
 
@@ -224,6 +231,15 @@ class Navigation:
 
         if "navigation" in signature:
             params["navigation"] = Navigation
+
+        if "navigation:inject" in ss:
+            for key, value in ss["navigation:inject"].items():
+                if key in signature:
+                    params[key] = value
+
+        for key, value in signature.items():
+            if key not in params:
+                params[key] = None
 
         return params
 
