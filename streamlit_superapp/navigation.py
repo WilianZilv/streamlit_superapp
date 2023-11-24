@@ -218,7 +218,12 @@ class Navigation:
         if "page" in kwargs or "navigation" in kwargs:
             raise Exception("Cannot inject 'page' or 'navigation'.")
 
+        previous = ss.get("navigation:inject", None)
+
         ss["navigation:inject"] = kwargs
+
+        if previous != kwargs:
+            st.rerun()
 
     @staticmethod
     def discover_params(func: Callable, page: Page):
