@@ -84,8 +84,11 @@ class Navigation:
             st.rerun()
 
     @staticmethod
-    def pages() -> List["Page"]:
+    def pages(verify_access=True) -> List["Page"]:
         pages: List[Page] = ss.pages
+
+        if not verify_access:
+            return pages
 
         _pages: List[Page] = []
 
@@ -178,7 +181,7 @@ class Navigation:
         if "pages" not in ss:
             PageLoader.initialize()
 
-        pages = Navigation.pages()
+        pages = Navigation.pages(verify_access=False)
 
         for page in pages:
             if page.path == path:
