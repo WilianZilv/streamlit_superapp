@@ -46,6 +46,11 @@ class Navigation:
         if isinstance(result, tuple):
             page, path = result
 
+            if page is None:
+                not_found(path)
+                st.stop()
+                raise Exception("Streamlit Super App not configured.")
+
         if page.access is not None:
             params = Navigation.discover_params(page.access, page)
             if not page.access(**params):
@@ -274,7 +279,7 @@ def handle_redirect(page: Page):
         valid = func(**params)
 
         if valid:
-            return Navigation.find_page(path) or Navigation.root(), path
+            return Navigation.find_page(path), path
 
     func = page.redirect
 
@@ -283,7 +288,7 @@ def handle_redirect(page: Page):
         path = func(**params)
 
         if isinstance(path, str):
-            return Navigation.find_page(path) or Navigation.root(), path
+            return Navigation.find_page(path), path
 
 
 def not_configured():
@@ -318,3 +323,9 @@ def not_configured():
 
     """
     )
+
+
+def not_found(path: str):
+    st.write("Page not found.")
+
+    st.write(f"Path: `{path}`")
