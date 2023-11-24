@@ -51,7 +51,12 @@ class PageLoader:
             file_name = page_path[-1]
             page_path = ".".join(page_path)
 
-            file_mtime = os.path.getmtime(path)
+            try:
+                file_mtime = os.path.getmtime(path)
+            except Exception as _:
+                ss["page_loader_paths"] = None
+                return PageLoader.initialize()
+
             last_mtime = ss.page_loader.get(page_path, 0)
 
             ss.page_loader[page_path] = file_mtime
