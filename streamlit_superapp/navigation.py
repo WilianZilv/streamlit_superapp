@@ -174,7 +174,7 @@ class Navigation:
         page_changed = previous_path != path
 
         if Navigation.use_query_params:
-            st.experimental_set_query_params(path=path)
+            st.query_params['path'] = path
         else:
             path_state = State("navigation:path", default_value=path)
             path_state.initial_value = path
@@ -190,7 +190,7 @@ class Navigation:
     @staticmethod
     def current_path(default: str = PageLoader.root):
         if Navigation.use_query_params:
-            return st.experimental_get_query_params().get("path", [default])[0]
+            return st.query_params.get("path", default)
 
         path_state = State("navigation:path", default_value=default)
 
