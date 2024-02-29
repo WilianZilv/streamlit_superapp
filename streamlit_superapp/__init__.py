@@ -6,7 +6,7 @@ except ModuleNotFoundError:
     )
 
 try:
-    st.experimental_get_query_params
+    st.query_params
 except AttributeError:
     raise AttributeError(
         "Streamlit version is too old. Please upgrade it with `pip install streamlit --upgrade`."
